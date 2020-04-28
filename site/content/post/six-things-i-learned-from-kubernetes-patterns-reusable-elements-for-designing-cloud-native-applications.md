@@ -5,16 +5,20 @@ date: 2020-04-26T22:03:45.655Z
 description: "Six Things I learned From: Kubernetes Patterns: Reusable Elements
   for Designing Cloud-Native Applications"
 ---
-###  Introduction
+### Introduction
 
 Kubernetes Patterns: Reusable Elements for Designing Cloud-Native Applications is an excellent introduction to designing applications for Kubernetes. There is an overview of common patterns in Kubernetes. It provides a good overview for a developer interested in deploying applications to Kubernetes and provides a useful overview of the Kubernetes landscape. Overall I enjoyed the book and pulled quite a few useful tricks out of it, however, it's written at a high level and there will be points where I was wishing to went a little deeper.
 
- In particular, the chapters on sidecars the ambassador and adapter patterns, along with the chapters on probes, service discovery, and configuration were worth reading. There were clear and simple explanations of the various options that are available. Kubernetes is extremely complicated and presents many things which all do relatively similar stuff so having them all explained and the differences between being made clear were useful. For example, a readiness probe and a liveness probe are similar but a liveness probe issues an HTTP request, and the readiness probe runs some sort of shell command.
+ In particular, the chapters on sidecars the ambassador and adapter patterns, along with the chapters on probes, service discovery, and configuration were worth reading. There were clear and simple explanations of the various options that are available. Kubernetes is extremely complicated and presents many things which all do relatively similar stuff so having them all explained and the differences between being made clear were useful. 
 
-  ### 6 things that I learned about Kubernetes
+### 6 things that I learned about Kubernetes
+
   The first thing that was really reinforced from reading this was about probes. There are a couple of different kinds of probes in Kubernetes. The main ones are liveness probes that issue some sort of TCP or HTTP request and are useful for services. They are also used to detect deadlocks. The other kind of probe is a readiness probe this is for things that are not HTTP services and instead, they issue some sort of command, for example, an echo. Both probes exist to make sure that a pod has started properly and one of them should be included in your deployments.
-* difference between daemon sets and deployments and when you should use each - Daemon sets are similar in many ways to a daemon on a Unix system. So they are supposed to be operational or infrastructure-related processes. They also guarantee one pod per node or a subset of nodes. Deployments are for more standard services and applications.
-* About controllers and operators
+
+The difference between daemon sets and deployments and when you should use each. Daemon sets are similar in many ways to a daemon on a Unix system. So they are supposed to be operational or infrastructure-related processes. They also guarantee one pod per node or a subset of nodes. Deployments are for more standard services and applications. Most things that you deploy should use deployments but obviously if you are deploying something like Prometheus Daemonsets are a useful tool.
+
+##### Controllers and Operators
+
 * Controllers exist to monitor a set of Kubernetes resources and keep them at the level that a declaration says they should be at. Deployments, statefulsets, and services are all examples of controllers. They do this by running a simple reconciliation process. You can also include additional data about what a controller does in the annotations, label or configmap. If you want to do something nonstandard with Kubernetes in a declarative way custom controllers are an option.
 * Operators build on top of controllers. They do this by also using a custom resource definition (CRD). An operator knows about Kubernetes and something else. For example, you could have a controller for Kafka that knows about Kubernetes and your Kafka setup and keeps everything in sync. If the CRD isn't flexible enough it's also possible to use the API extension hooks.
 * The difference between controllers and operators is fuzzy in many places. It's a spectrum between controllers and operators and it would be hard to draw a line in the sand between the two.
