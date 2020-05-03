@@ -1,9 +1,9 @@
 ---
-title: "Six Things I learned From: Kubernetes Patterns: Reusable Elements for
-  Designing Cloud-Native Applications"
-date: 2020-04-26T22:03:45.655Z
-description: "Six Things I learned From: Kubernetes Patterns: Reusable Elements
+title: "Six Things I Learned From Reading Kubernetes Patterns: Reusable Elements
   for Designing Cloud-Native Applications"
+date: 2020-04-26T22:03:45.655Z
+description: "Six Things I Learned From Reading Kubernetes Patterns: Reusable
+  Elements for Designing Cloud-Native Applications"
 ---
 ### Introduction
 
@@ -15,7 +15,7 @@ Kubernetes Patterns: Reusable Elements for Designing Cloud-Native Applications i
 
 ##### The multiple options that exist for probes
 
-  The first thing that was really reinforced from reading this was about probes. There are a couple of different kinds of probes in Kubernetes. The main ones are liveness probes that issue some sort of TCP or HTTP request and are useful for services. They are also used to detect deadlocks. The other kind of probe is a readiness probe this is for things that are not HTTP services and instead, they issue some sort of command, for example, an echo. Both probes exist to make sure that a pod has started properly and one of them should be included in your deployments.
+  The first thing that was really reinforced from reading this was about probes. Probes are a key to doing healthchecks in kubernetes and are critical for effective monitoring of pods. A real question that we have to ask is what do we mean by being up and probes provide a programmatic way of getting that answer. There are a couple of different kinds of probes in Kubernetes. The main ones are liveness probes that issue some sort of TCP or HTTP request and are useful for services. They are also used to detect deadlocks. The other kind of probe is a readiness probe this is for things that are not HTTP services and instead, they issue some sort of command, for example, an echo. Both probes exist to make sure that a pod has started properly and one of them should be included in your deployments.
 
 ##### The difference between daemon sets and deployments and when you should use each.
 
